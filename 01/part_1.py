@@ -9,4 +9,5 @@ for line in data:
         if letter.isdigit():
             digits.append(letter)
     sol += int(digits[0] + digits[-1])
-print(f"sol: {sol}")
+
+print(sol)

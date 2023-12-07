@@ -19,4 +19,4 @@ for i, line in enumerate(data):
     num_instances[i+1:i+round_points+1] += num_instances[i]
 
 sol = int(num_instances.sum())
-print(f"sol: {sol}")
+print(sol)

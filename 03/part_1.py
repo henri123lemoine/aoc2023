@@ -80,4 +80,4 @@ for i in range(data_np.shape[0]):
         else:
             curr_num += str(data_np[i, j])
 
-print(f"sol: {sol}")
+print(sol)

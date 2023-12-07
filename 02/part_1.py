@@ -29,4 +29,4 @@ for i, line in enumerate(data, start=1):
             break
 
 sol = (i**2 + i) // 2 - _id_sum
-print(f"sol: {sol}")
+print(sol)

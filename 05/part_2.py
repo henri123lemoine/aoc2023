@@ -93,4 +93,4 @@ sol = float("inf")
 for start_range, end_range in seed_ranges:
     sol = min(sol, start_range)
 
-print(f"sol: {sol}")
+print(sol)

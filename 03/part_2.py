@@ -126,4 +126,4 @@ for x, y in special_gears:
     assert len(nums) == 2
     sol += nums[0] * nums[1]
 
-print(f"sol: {sol}")
+print(sol)

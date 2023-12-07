@@ -71,4 +71,4 @@ for line in data:
     to_add = int(f"{d[digit1]}{d[digit2]}")
     sol += to_add
 
-print(f"sol: {sol}")
+print(sol)

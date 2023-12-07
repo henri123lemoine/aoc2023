@@ -23,4 +23,4 @@ for _ in range(map_count):
 
 sol = min(seeds)
 
-print(f"sol: {sol}")
+print(sol)

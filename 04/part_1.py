@@ -17,4 +17,4 @@ for i, line in enumerate(data):
             round_points += 1
     sol += round(2**round_points)
 
-print(f"sol: {sol}")
+print(sol)

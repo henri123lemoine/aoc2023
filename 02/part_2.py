@@ -37,4 +37,4 @@ for i, line in enumerate(data, start=1):
     
     sol += fewest_reds * fewest_greens * fewest_blues
 
-print(f"sol: {sol}")
+print(sol)

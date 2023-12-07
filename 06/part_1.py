@@ -13,4 +13,4 @@ for time, distance in zip(times, distances):
             tmp += 1
     sol *= tmp
 
-print(f"sol: {sol}")
+print(sol)
