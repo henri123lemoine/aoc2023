@@ -1,7 +1,13 @@
-import sys
 import os
+import sys
+import requests
 import importlib.util
+from datetime import datetime
+from dotenv import load_dotenv
 from contextlib import redirect_stdout, redirect_stderr
+
+load_dotenv()
+
 
 def run_advent_of_code(day, part, input_file):
     module_name = f"{day}/part_{part}.py"
@@ -13,11 +19,33 @@ def run_advent_of_code(day, part, input_file):
         sys.stdin = f
         module_spec.loader.exec_module(module)
 
-def create_advent_of_code(day):
-    os.makedirs(day, exist_ok=True)
 
-    open(os.path.join(day, "input.txt"), 'a').close()
-    open(os.path.join(day, "sample.txt"), 'a').close()
+def fetch_aoc_data(year: int, day: int, token: str):
+    """Fetch puzzle input and description from Advent of Code."""
+    input_url = f"https://adventofcode.com/{year}/day/{day}/input"
+    headers = {'Cookie': f'session={token}'}
+    input_response = requests.get(input_url, headers=headers)
+    return input_response.text
+
+
+def create_advent_of_code(day: int):
+    """Create necessary files and fetch data from Advent of Code."""
+    day_path = str(day).zfill(2)
+    year = datetime.now().year
+    token = os.environ.get("TOKEN")
+
+    if not token:
+        raise Exception("TOKEN environment variable not set.")
+
+    os.makedirs(day_path, exist_ok=True)
+
+    input_file = os.path.join(day_path, "input.txt")
+    open(os.path.join(day_path, "sample.txt"), 'a').close()
+
+    if not os.path.exists(input_file) or os.path.getsize(input_file) == 0:
+        input_data = fetch_aoc_data(year, day, token)
+        with open(input_file, 'w') as f:
+            f.write(input_data)
 
     template = ("import sys\n"
                 "data = sys.stdin.readlines()\n\n"
@@ -27,8 +55,9 @@ def create_advent_of_code(day):
                 "print(f\"sol: {sol}\")\n")
 
     for part in ['1', '2']:
-        with open(os.path.join(day, f"part_{part}.py"), 'w') as file:
+        with open(os.path.join(day_path, f"part_{part}.py"), 'w') as file:
             file.write(template)
+
 
 def main():
     if len(sys.argv) == 1:
